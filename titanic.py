@@ -1,15 +1,16 @@
 import pandas as pd
-import numpy as np
+import seaborn as sns
+
 import matplotlib.pyplot as plt
-import multiprocessing
-from sklearn.preprocessing import LabelEncoder, OneHotEncoder
+from sklearn.preprocessing import OneHotEncoder
 from sklearn.model_selection import train_test_split
-import pathlib
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.ensemble import RandomForestClassifier
-import time
-import os
-import seaborn as sns
+from sklearn.impute import SimpleImputer
+from sklearn.pipeline import Pipeline
+from sklearn.compose import ColumnTransformer
+from sklearn.metrics import confusion_matrix
+
 
 TrainingData = pd.read_csv("data.csv")
 
@@ -50,11 +51,7 @@ sns.histplot(data=TrainingData, x="Age", bins=15, kde=False).set_title(
 plt.show()
 
 ## Encoder les données imputées ou transformées.
-from sklearn.preprocessing import MinMaxScaler, OneHotEncoder
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.impute import SimpleImputer
-from sklearn.pipeline import Pipeline
-from sklearn.compose import ColumnTransformer
+
 
 numeric_features = ["Age", "Fare"]
 categorical_features = ["Embarked", "Sex"]
@@ -108,11 +105,6 @@ jetonapi = "$trotskitueleski1917"
 
 # Random Forest
 
-from sklearn.preprocessing import LabelEncoder, OneHotEncoder
-from sklearn.model_selection import train_test_split
-import pathlib
-from sklearn.preprocessing import MinMaxScaler
-from sklearn.ensemble import RandomForestClassifier
 
 
 # Ici demandons d'avoir 20 arbres
@@ -124,8 +116,6 @@ pipe.fit(X_train, y_train)
 rdmf_score = pipe.score(X_test, y_test)
 rdmf_score_tr = pipe.score(X_train, y_train)
 print(f"{rdmf_score:.1%} de bonnes réponses sur les données de test pour validation")
-from sklearn.metrics import confusion_matrix
-
 print(20 * "-")
 print("matrice de confusion")
 print(confusion_matrix(y_test, pipe.predict(X_test)))
