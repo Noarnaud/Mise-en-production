@@ -10,7 +10,6 @@ import time
 import os
 import seaborn as sns
 
-os.chdir('/home/onyxia/work/Mise-en-production')
 TrainingData = pd.read_csv('data.csv')
 
 TrainingData.head()
