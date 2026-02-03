@@ -5,6 +5,9 @@ Prediction de la survie d'un individu sur le Titanic
 import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
+import argparse
+import os
+from dotenv import load_dotenv
 
 from sklearn.preprocessing import OneHotEncoder, MinMaxScaler
 from sklearn.model_selection import train_test_split
@@ -14,10 +17,28 @@ from sklearn.pipeline import Pipeline
 from sklearn.compose import ColumnTransformer
 from sklearn.metrics import confusion_matrix
 
-N_TREES = 20
-MAX_DEPTH = None
+load_dotenv()
+parser = argparse.ArgumentParser(description="Configuration du modèle")
+parser.add_argument(
+    "--N_TREES", 
+    type=int, 
+    default=20,  
+    help="Un entier numérique pour le nombre d'arbres"
+)
+
+parser.add_argument(
+    "--MAX_DEPTH", 
+    type=int, 
+    default=None, 
+    help="Un entier numérique ou None pour la profondeur maximale"
+)
+
+args = parser.parse_args()
+
+N_TREES = args.N_TREES
+MAX_DEPTH = args.MAX_DEPTH
 MAX_FEATURES = "sqrt"
-JETON_API = "$trotskitueleski1917"
+JETON_API = os.getenv("JETON_API")
 
 
 # IMPORT ET EXPLORATION DONNEES --------------------------------
