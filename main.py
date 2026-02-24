@@ -21,7 +21,11 @@ import duckdb
 from src.validation.check import (
     check_name_formatting,
     check_missing_values,
+<<<<<<< HEAD
     check_data_leakage,
+=======
+    check_data_leakage
+>>>>>>> 2aef7492115f2dd5c422a0e608b1291a1445c5aa
 )
 
 
@@ -33,7 +37,14 @@ logging.basicConfig(
     style="{",
     datefmt="%Y-%m-%d %H:%M",
     level=logging.DEBUG,
+<<<<<<< HEAD
     handlers=[logging.FileHandler("recording.log"), logging.StreamHandler()],
+=======
+    handlers=[
+        logging.FileHandler("recording.log"),
+        logging.StreamHandler()
+    ]
+>>>>>>> 2aef7492115f2dd5c422a0e608b1291a1445c5aa
 )
 
 
@@ -63,11 +74,17 @@ logging.debug(f"Valeur de l'argument n_trees: {n_trees}")
 
 # QUALITY DIAGNOSTICS  ---------------------------------------
 
+<<<<<<< HEAD
 logging.debug(f"\n{80 * '-'}\nStarting data validation step\n{80 * '-'}")
 
 query_definition = (
     f"CREATE TEMP TABLE titanic AS (SELECT * FROM read_parquet('{URL_RAW}'))"
 )
+=======
+logging.debug(f"\n{80*'-'}\nStarting data validation step\n{80*'-'}")
+
+query_definition = f"CREATE TEMP TABLE titanic AS (SELECT * FROM read_parquet('{URL_RAW}'))"
+>>>>>>> 2aef7492115f2dd5c422a0e608b1291a1445c5aa
 con.sql(query_definition)
 
 column_names = con.sql("SELECT column_name FROM (DESCRIBE titanic)").to_df()[
@@ -82,7 +99,11 @@ for var in column_names:
 
 # FEATURE ENGINEERING    -----------------------------------------
 
+<<<<<<< HEAD
 logging.debug(f"\n{80 * '-'}\nStarting feature engineering phase\n{80 * '-'}")
+=======
+logging.debug(f"\n{80*'-'}\nStarting feature engineering phase\n{80*'-'}")
+>>>>>>> 2aef7492115f2dd5c422a0e608b1291a1445c5aa
 
 titanic = con.sql(
     f"SELECT Survived, {', '.join(CATEGORICAL_FEATURES + NUMERIC_FEATURES)} FROM titanic"
@@ -139,17 +160,29 @@ pipe = Pipeline(
 
 # TRAINING AND EVALUATION --------------------------------------------
 
+<<<<<<< HEAD
 logging.debug(f"\n{80 * '-'}\nStarting model fitting phase\n{80 * '-'}")
+=======
+logging.debug(f"\n{80*'-'}\nStarting model fitting phase\n{80*'-'}")
+>>>>>>> 2aef7492115f2dd5c422a0e608b1291a1445c5aa
 
 pipe.fit(X_train, y_train)
 rdmf_score = pipe.score(X_test, y_test)
 rdmf_score_tr = pipe.score(X_train, y_train)
 
+<<<<<<< HEAD
 logging.info(
     f"{rdmf_score:.1%} de bonnes réponses sur les données de test pour validation"
 )
+=======
+logging.info(f"{rdmf_score:.1%} de bonnes réponses sur les données de test pour validation")
+>>>>>>> 2aef7492115f2dd5c422a0e608b1291a1445c5aa
 
 logging.info("Matrice de confusion:")
 logging.info(confusion_matrix(y_test, pipe.predict(X_test)))
 
+<<<<<<< HEAD
 logging.debug(f"\n{80 * '-'}\nFILE ENDED SUCCESSFULLY!\n{80 * '-'}")
+=======
+logging.debug(f"\n{80*'-'}\nFILE ENDED SUCCESSFULLY!\n{80*'-'}")
+>>>>>>> 2aef7492115f2dd5c422a0e608b1291a1445c5aa
