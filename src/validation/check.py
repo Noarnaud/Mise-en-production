@@ -20,13 +20,9 @@ def check_name_formatting(
     bad = connection.sql(query).fetchone()[0]
 
     if bad == 0:
-<<<<<<< HEAD
         logging.info(
             "Test OK: colonne 'Name' se découpe toujours en 2 parties avec ','"
         )
-=======
-        logging.info("Test OK: colonne 'Name' se découpe toujours en 2 parties avec ','")
->>>>>>> 2aef7492115f2dd5c422a0e608b1291a1445c5aa
     else:
         logging.warn(
             f"Problème dans la colonne Name: {bad} ne se décomposent pas en 2 parties."
